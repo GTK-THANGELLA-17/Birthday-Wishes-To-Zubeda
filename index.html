@@ -64,62 +64,79 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw; /* Use 100vw for full width */
+    height: 100vh; /* Use 100vh for full height */
     background: rgba(0, 0, 0, 0.8); /* Dark background for the video */
     z-index: 999;
     padding: 20px;
     text-align: center;
     animation: zoomIn 1s forwards ease-out;
+    overflow: hidden; /* Prevent overflow */
 }
 
-        #intro-video-card video {
-            width: 100%;
-            max-width: 600px;
-            border: 3px outset #000000;
-border-radius: 7px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+#intro-video-card video {
+    width: 100%; /* Make the video take up the full width */
+    height: 100%; /* Make the video take up the full height */
+    object-fit: cover; /* Ensure the video covers the entire container */
+    max-width: none; /* Remove max-width limitation */
+    max-height: none; /* Remove max-height limitation */
+    border: 3px outset #000000;
+    border-radius: 7px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
 
-        #intro-video-card .skip-btn {
-            background: #ff5e78;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-           border: 3px outset #000000;
-border-radius: 7px;
-            margin-top: 10px;
-            cursor: pointer;
-            animation: bounce 2s infinite alternate;
-        }
+#intro-video-card .skip-btn {
+    background: #ff5e78;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: 3px outset #000000;
+    border-radius: 7px;
+    margin-top: 10px;
+    cursor: pointer;
+    animation: bounce 2s infinite alternate;
+}
 
-        #intro-video-card .skip-btn:hover {
-            background: #ff2e4f;
-			
-        }
+#intro-video-card .skip-btn:hover {
+    background: #ff2e4f;
+}
 
-        /* Zoom In Animation for the Video Card */
-        @keyframes zoomIn {
-            0% {
-                transform: translate(-50%, -50%) scale(0.5);
-                opacity: 0;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-        }
+/* Zoom In Animation for the Video Card */
+@keyframes zoomIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
 
-        /* Bounce Animation for Skip Button */
-        @keyframes bounce {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-10px);
-            }
-        }
+/* Bounce Animation for Skip Button */
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Make sure the video looks great on mobile screens */
+@media screen and (max-width: 767px) {
+    #intro-video-card {
+        padding: 0; /* Remove padding on small screens */
+    }
+
+    #intro-video-card video {
+        object-fit: cover; /* Ensure the video fully covers the screen */
+        width: 100%;
+        height: 100%;
+    }
+}
+
 
 /* Initial Screen */
 #initial-screen {
@@ -250,7 +267,46 @@ border-radius: 7px;
     transition: 0.3s ease;
     width: 100%; /* Ensure inputs and buttons take up full width */
     max-width: 400px; /* Limit the width to a reasonable value */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
 }
+
+/* Input text color */
+#initial-screen input {
+    color: black; /* Change input text color to black */
+}
+
+/* Focus effect for input */
+#initial-screen input:focus {
+    outline: none; /* Remove default focus outline */
+    border: 2px solid #ff4081; /* Add pink border on focus */
+    box-shadow: 0 0 5px rgba(255, 64, 129, 0.6); /* Glow effect */
+}
+
+/* Button hover effect */
+#initial-screen button:hover {
+    background-color: #ff4081; /* Lighter pink on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Input hover effect */
+#initial-screen input:hover {
+    background-color: #ffe4e6; /* Light background color on hover */
+}
+
+/* Focus effect for input */
+#initial-screen input:focus {
+    outline: none; /* Remove default outline */
+    border: 2px solid #ff4081; /* Pink border when focused */
+    box-shadow: 0 0 8px rgba(255, 64, 129, 0.6); /* Soft glow effect */
+}
+
+/* Button active effect (when clicked) */
+#initial-screen button:active {
+    transform: scale(0.98); /* Shrink the button slightly */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Smaller shadow on click */
+}
+
 
 #celebration-screen .card {
     max-width: 90%; /* Make the card more responsive */
@@ -268,28 +324,49 @@ border-radius: 7px;
 
 /* Styling for sound and stop buttons */
 .sound-btn, .stop-btn {
-    background-color: #5c5470; /* Initial background color */
-    color: #141010;
-    border: none;
-    padding: 15px 25px;
-    font-size: 1.8rem;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    margin-top: 20px;
-    max-width: 300px;
+    background-color: #5c5470 !important; /* Initial background color */
+    color: #141010 !important;
+    border: none !important;
+    padding: 15px 25px !important;
+    font-size: 1.8rem !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, transform 0.3s ease !important;
+    margin-top: 20px !important;
+    max-width: 300px !important;
 }
 
 /* Hover state for sound and stop buttons */
 .sound-btn:hover, .stop-btn:hover {
-    background-color: #ff2e4f; /* Light red when hovered */
+    background-color: #ff2e4f !important; /* Light red when hovered */
 }
 
 /* Active state for sound and stop buttons (when clicked) */
 .sound-btn:active, .stop-btn:active {
-    background-color: #ff0000; /* Red background when clicked */
-    color: white; /* Keep text white for contrast */
+    background-color: #ff0000 !important; /* Red background when clicked */
+    color: white !important; /* Keep text white for contrast */
 }
+
+/* Social buttons styling */
+.social-btns a {
+    margin: 10px !important;
+    font-size: 2rem !important;
+    color: #141010 !important;
+    text-decoration: none !important;
+    transition: transform 0.3s ease, color 0.3s ease !important;
+}
+
+/* Hover effect for social buttons */
+.social-btns a:hover {
+    transform: scale(1.2) !important;
+    color: #ff5e78 !important; /* Light red when hovered */
+}
+
+/* Active state for social buttons (when clicked) */
+.social-btns a:active {
+    color: #000000 !important; /* Black color when clicked */
+}
+
 
 /* Social buttons styling */
 .social-btns a {
@@ -297,12 +374,12 @@ border-radius: 7px;
     font-size: 2rem;
     color: #141010;
     text-decoration: none;
-    transition: 0.3s;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 /* Hover effect for social buttons */
 .social-btns a:hover {
-    transform: scale(1.2);
+    transform: scale(1.2); /* Scale up on hover */
     color: #ff5e78; /* Light red when hovered */
 }
 
@@ -310,6 +387,20 @@ border-radius: 7px;
 .social-btns a:active {
     color: #000000; /* Black color when clicked */
 }
+
+/* Additional tweaks for responsiveness */
+@media (max-width: 600px) {
+    .sound-btn, .stop-btn {
+        font-size: 1.5rem;
+        padding: 12px 20px;
+        max-width: 100%;
+    }
+
+    .social-btns a {
+        font-size: 1.5rem;
+    }
+}
+
 
 
 @media (max-width: 1024px) {
@@ -401,7 +492,7 @@ border-radius: 7px;
             height: 100%; /* Maintains the image aspect ratio */
             border-radius: 10px;
             object-fit: cover;
-            max-height: 400px; /* Controls the height on larger screens */
+            max-height: 500px; /* Controls the height on larger screens */
         }
 
  .play-btn {
@@ -430,6 +521,23 @@ border-radius: 7px;
     .play-btn:focus {
         outline: none;              /* Remove outline on focus */
     }
+	
+	#copy-celebration-btn, #copy-age-btn {
+    background-color: #ff5e78;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#copy-celebration-btn:hover, #copy-age-btn:hover {
+    background-color: #ff2e4f;
+}
+
+
     </style>
 </head>
 <body onload="resetToInitial()">
@@ -443,17 +551,19 @@ border-radius: 7px;
     </div>
 
 <!-- Intro Video Screen -->
-<div id="intro-video-screen" style="display: none; text-align: center; padding: 100px;">
+<div id="intro-video-screen" style="display: none; text-align: center; padding: 0;">
     <div class="card mx-auto" style="width: 100%; max-width: 1000px; animation: fadeIn 2s;">
         <video id="intro-video" class="card-img-top" playsinline>
             <source src="./Gallary/Wish Intro.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <button id="play-video-btn" class="play-btn" style="margin-top: 20px;">
-    <i class="fas fa-play"></i> Play Video
-</button>
+            <i class="fas fa-play"></i> Play Video
+        </button>
     </div>
 </div>
+
+
 
     <!-- Celebration Screen (Hidden Initially) -->
     <div id="celebration-screen" style="display: none;">
@@ -513,10 +623,16 @@ border-radius: 7px;
             </div>
         </div>
 
-        <!-- Celebration Message -->
-        <div id="celebration-message"></div>
+<!-- Celebration Message Area -->
+<div id="celebration-message"></div>
 
-        <div id="age-details"></div>
+<!-- Age Calculation Message Area -->
+<div id="age-details"></div>
+
+<!-- Copy Buttons -->
+<button id="copy-celebration-btn" class="btn btn-copy">Copy Celebration Message</button>
+<button id="copy-age-btn" class="btn btn-copy">Copy Age Calculation Message</button>
+
 
         <div class="btn-container">
     <button class="btn" id="play-music-btn" onclick="playMusic()">Play Music</button>
@@ -560,29 +676,31 @@ border-radius: 7px;
         this.style.display = 'none'; // Hide the button once video starts
     });
 
-        function validateDetails() {
-            const name = document.getElementById('name-input').value;
-            const dob = document.getElementById('dob-input').value;
-            const dobFormatted = new Date(dob);
-            const correctName = "Zubeda";
-            const correctDob = new Date("1995-11-28");
+       function validateDetails() {
+    const name = document.getElementById('name-input').value;
+    const dob = document.getElementById('dob-input').value;
+    const dobFormatted = new Date(dob);
+    const correctName = "Zubeda";
+    const correctDob = new Date("1995-11-28");
 
-            const isNameValid = name === correctName;
-            const isDobValid = dobFormatted.getFullYear() === correctDob.getFullYear() &&
-                                dobFormatted.getMonth() === correctDob.getMonth() &&
-                                dobFormatted.getDate() === correctDob.getDate();
+    // Make the name comparison case-insensitive
+    const isNameValid = name.toLowerCase() === correctName.toLowerCase();
+    const isDobValid = dobFormatted.getFullYear() === correctDob.getFullYear() &&
+                        dobFormatted.getMonth() === correctDob.getMonth() &&
+                        dobFormatted.getDate() === correctDob.getDate();
 
-            const celebrateBtn = document.getElementById('celebrate-btn');
-            const warningMessage = document.getElementById('warning-message');
+    const celebrateBtn = document.getElementById('celebrate-btn');
+    const warningMessage = document.getElementById('warning-message');
 
-            if (!isNameValid || !isDobValid) {
-                warningMessage.textContent = "Please enter correct details: Name: Zubeda, DOB: 28th November 1995.";
-                celebrateBtn.disabled = true;
-            } else {
-                warningMessage.textContent = "";
-                celebrateBtn.disabled = false;
-            }
-        }
+    if (!isNameValid || !isDobValid) {
+        warningMessage.textContent = "Please enter correct details: Name: Zubeda, DOB: 28th November 1995.";
+        celebrateBtn.disabled = true;
+    } else {
+        warningMessage.textContent = "";
+        celebrateBtn.disabled = false;
+    }
+}
+
 
         function startIntroVideo() {
     document.getElementById('initial-screen').style.display = 'none';
@@ -651,7 +769,7 @@ function startCelebration() {
     document.getElementById('initial-screen').style.display = 'none';
     document.getElementById('celebration-screen').style.display = 'block';
 
-    // Personalized birthday message with HTML tags
+    // Celebration message with <br> tags for line breaks
     let messageText = `
         🎂 <strong>Happy Birthday, ${name}!</strong> 🥳<br>
         Wishing you a day as extraordinary as you are! 🎉<br><br>
@@ -660,7 +778,7 @@ function startCelebration() {
 
         Over the past five years, your unwavering dedication, expertise, and tireless work ethic have inspired all of us. We’re so proud of everything you’ve achieved and the way you’ve grown—both personally and professionally.<br><br>
 
-        <em>But beyond your professional excellence, it's your kindness, grace, and the infectious joy you bring to everyone around you that makes you truly one of a kind.</em><br><br>
+        But beyond your professional excellence, it's your kindness, grace, and the infectious joy you bring to everyone around you that makes you truly one of a kind.<br><br>
 
         Your presence is a gift, and your ability to uplift others with positivity and warmth is something we cherish every single day.<br><br>
 
@@ -674,7 +792,10 @@ function startCelebration() {
         <em>"The only way to do great work is to love what you do." – Steve Jobs</em>
     `;
 
-    // Typing effect implementation
+    // Age details message (separate message with line breaks)
+    const ageDetails = calculateAge();
+
+    // Typing effect implementation for celebration message
     let index = 0;
     const messageContainer = document.getElementById('celebration-message');
     let parts = messageText.split(/(<[^>]*>)/);  // Split message by HTML tags
@@ -689,41 +810,18 @@ function startCelebration() {
 
     typeMessage();  // Start the typing effect
 
-    // Calculate and display age details
-    calculateAge();
+    // Update the copy buttons for both messages
+    updateCopyButtons(messageText, ageDetails);
 
     // Trigger confetti
     createConfetti();
 
     // Play music automatically when the celebration screen is shown
     playMusic();
+
+    // Display the Age Calculation message
+    document.getElementById('age-details').innerHTML = ageDetails; 
 }
-
-function typeMessage() {
-    let htmlContent = messageText;
-    
-    // A regular expression to identify HTML tags
-    const regex = /(<[^>]*>)/g;
-    let parts = htmlContent.split(regex);
-
-    // Filter out empty parts
-    parts = parts.filter(part => part !== "");
-
-    let index = 0;
-    const messageContainer = document.getElementById('celebration-message');
-
-    const addNextPart = () => {
-        if (index < parts.length) {
-            messageContainer.innerHTML += parts[index]; // Append each part (text or HTML tag)
-            index++;
-            setTimeout(addNextPart, 50); // Delay for typing effect
-        }
-    };
-
-    // Start typing
-    addNextPart();
-}
-
 
 function calculateAge() {
     const dob = new Date(1995, 10, 28); // Example birthday: 28th Nov 1995
@@ -736,18 +834,44 @@ function calculateAge() {
     const ageInDays = Math.floor(ageInHours / 24);
     const ageInYears = today.getFullYear() - dob.getFullYear();
 
-    // Calculate months, adjusting for the case where the current date is before the birthday this year
     let ageInMonths = today.getMonth() - dob.getMonth() + (12 * ageInYears);
     if (today.getDate() < dob.getDate()) ageInMonths--; // Adjust if birthday hasn't occurred yet
 
-    // Calculate weeks
     const ageInWeeks = Math.floor(ageInDays / 7);
 
-    // Output the results
-    const ageDetails = `Successfully Completed living your life happily Up To Age: ${ageInYears} years, ${ageInMonths} months, ${ageInWeeks} weeks, ${ageInDays} days, ${ageInHours} hours, ${ageInMinutes} minutes, ${ageInSeconds} seconds is an impressive milestone. Seek out new experiences, challenges, and opportunities for personal and professional growth. Embracing change and learning continuously can lead to a more fulfilling and enriching life journey.`;
-    
-    document.getElementById('age-details').textContent = ageDetails.trim();
+    // Return the age details message with <br> tags for line breaks
+    return `Successfully completed living your life happily Up To Age: ${ageInYears} years, ${ageInMonths} months, ${ageInWeeks} weeks, ${ageInDays} days, ${ageInHours} hours, ${ageInMinutes} minutes, ${ageInSeconds} seconds is an impressive milestone. Seek out new experiences, challenges, and opportunities for personal and professional growth. Embracing change and learning continuously can lead to a more fulfilling and enriching life journey.`;
 }
+
+// Function to update the Copy Buttons for both messages
+function updateCopyButtons(messageText, ageDetails) {
+    // Copy button for Celebration message
+    const copyCelebrationButton = document.getElementById('copy-celebration-btn');
+    copyCelebrationButton.addEventListener('click', function() {
+        const textarea = document.createElement('textarea');
+        textarea.value = messageText;  // Set celebration message with <br> tags
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        alert('Celebration Message copied to clipboard!');
+    });
+
+    // Copy button for Age Calculation message
+    const copyAgeButton = document.getElementById('copy-age-btn');
+    copyAgeButton.addEventListener('click', function() {
+        const textarea = document.createElement('textarea');
+        textarea.value = ageDetails;  // Set age details message with <br> tags
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        alert('Age Calculation Message copied to clipboard!');
+    });
+}
+
 
 
 // Create confetti effect
@@ -760,10 +884,11 @@ function createConfetti() {
 }
 
 
-let musicPlaying = true;
-        let voicePlaying = false;
+let musicPlaying = false;  // Initially, music is not playing
+let voicePlaying = false;  // Initially, voice is not playing
 
-       // Play Music Function
+// Play Music Function
+// Play Music Function
 function playMusic() {
     const music = document.getElementById('birthday-music');
     const playMusicBtn = document.getElementById('play-music-btn');
@@ -772,6 +897,12 @@ function playMusic() {
     music.play();  // Start playing the music
     playMusicBtn.style.display = 'none';  // Hide the Play button
     stopMusicBtn.style.display = 'inline-block';  // Show the Stop button
+
+    // Apply the active effect to play button
+    playMusicBtn.classList.add('active');
+    setTimeout(() => {
+        playMusicBtn.classList.remove('active');
+    }, 200);  // Remove after 200ms
 }
 
 // Stop Music Function
@@ -784,6 +915,12 @@ function stopMusic() {
     music.currentTime = 0;  // Reset to the beginning
     playMusicBtn.style.display = 'inline-block';  // Show the Play button again
     stopMusicBtn.style.display = 'none';  // Hide the Stop button
+
+    // Apply the active effect to stop button
+    stopMusicBtn.classList.add('active');
+    setTimeout(() => {
+        stopMusicBtn.classList.remove('active');
+    }, 200);  // Remove after 200ms
 }
 
 // Play Voice Function
@@ -795,6 +932,12 @@ function playVoice() {
     voice.play();  // Play the voice message
     playVoiceBtn.style.display = 'none';  // Hide the Play button
     stopVoiceBtn.style.display = 'inline-block';  // Show the Stop button
+
+    // Apply the active effect to play button
+    playVoiceBtn.classList.add('active');
+    setTimeout(() => {
+        playVoiceBtn.classList.remove('active');
+    }, 200);  // Remove after 200ms
 }
 
 // Stop Voice Function
@@ -807,6 +950,12 @@ function stopVoice() {
     voice.currentTime = 0;  // Reset to the beginning
     playVoiceBtn.style.display = 'inline-block';  // Show the Play button again
     stopVoiceBtn.style.display = 'none';  // Hide the Stop button
+
+    // Apply the active effect to stop button
+    stopVoiceBtn.classList.add('active');
+    setTimeout(() => {
+        stopVoiceBtn.classList.remove('active');
+    }, 200);  // Remove after 200ms
 }
 
 // Automatically play the birthday music when the page loads (celebration screen)
@@ -814,9 +963,11 @@ window.onload = function() {
     playMusic();  // Play the music automatically when the page loads
 };
 
+
 // Event listeners for input validation and button enable/disable
 document.getElementById('name-input').addEventListener('input', validateDetails);
 document.getElementById('dob-input').addEventListener('input', validateDetails);
+
 
     </script>
 </body>
