@@ -103,26 +103,6 @@ body {
     }
 }
 
-
-/* Initial Screen */
-#initial-screen {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-#initial-screen h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-}
-
 /* Typing Animation for Celebration Message */
 #celebration-message {
     font-family: 'Poppins', sans-serif;
@@ -507,11 +487,14 @@ border-radius: 7px;
     </style>
 </head>
 <body onload="resetToInitial()">
-    <!-- Initial Screen -->
+  <!-- Initial Screen -->
     <div id="initial-screen">
-        <h1>🎉 Hi, Zubeda ! With warm regards, this message is from Your Dear Family Members 🎉</h1>
+        <h1>🎉 Hi, Zubeda! With warm regards, this message is from Your Dear Family Members 🎉</h1>
         <input type="text" id="name-input" placeholder="Enter Name" oninput="validateDetails()">
-        <input type="date" id="dob-input" oninput="validateDetails()">
+		<div>
+		<p>Enter Your Date Of Birth</p>
+		</div>
+        <input type="date" id="dob-input" placeholder="Enter Date Of Birth" oninput="validateDetails()">
         <button id="celebrate-btn" onclick="startIntroVideo()" disabled>Click to Celebrate!</button>
         <div class="warning-message" id="warning-message"></div>
     </div>
