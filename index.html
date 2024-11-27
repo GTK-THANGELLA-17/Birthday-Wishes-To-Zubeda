@@ -651,20 +651,43 @@ function startCelebration() {
     document.getElementById('initial-screen').style.display = 'none';
     document.getElementById('celebration-screen').style.display = 'block';
 
-    // Create and display a personalized birthday message with typing animation
-    let messageText = `🎂 Happy Birthday, ${name} ! 🥳\nWishing you a day as extraordinary as you are! 🎉\n\nToday, we celebrate Your Birthday And Also not just your remarkable talents as a software tester, but the incredible person you are. Over the past five years, your unwavering dedication, expertise, and tireless work ethic have inspired all of us. We’re so proud of everything you’ve achieved and the way you’ve grown—both personally and professionally.\n\nBut beyond your professional excellence, it's your kindness, grace, and the infectious joy you bring to everyone around you that makes you truly one of a kind. Your presence is a gift, and your ability to uplift others with positivity and warmth is something we cherish every single day.\n\nWe are incredibly grateful to have you in our lives, and we wish you nothing but happiness, success, and fulfillment in the year ahead. May this special day mark the beginning of even greater things for you.\n\nEnjoy every second of your celebration—you truly deserve all the love and joy that comes your way! 🎂💖\n\nWith all our love and warmest wishes,\nYour Family.\n\n"The best way to predict the future is to create it." – Abraham Lincoln\n\n"The only way to do great work is to love what you do." – Steve Jobs`;
+    // Personalized birthday message with HTML tags
+    let messageText = `
+        🎂 <strong>Happy Birthday, ${name}!</strong> 🥳<br>
+        Wishing you a day as extraordinary as you are! 🎉<br><br>
 
+        <strong>Today, we celebrate Your Birthday</strong> and also not just your remarkable talents as a software tester, but the incredible person you are.<br><br>
 
+        Over the past five years, your unwavering dedication, expertise, and tireless work ethic have inspired all of us. We’re so proud of everything you’ve achieved and the way you’ve grown—both personally and professionally.<br><br>
+
+        <em>But beyond your professional excellence, it's your kindness, grace, and the infectious joy you bring to everyone around you that makes you truly one of a kind.</em><br><br>
+
+        Your presence is a gift, and your ability to uplift others with positivity and warmth is something we cherish every single day.<br><br>
+
+        We are incredibly grateful to have you in our lives, and we wish you nothing but happiness, success, and fulfillment in the year ahead. May this special day mark the beginning of even greater things for you.<br><br>
+
+        Enjoy every second of your celebration—you truly deserve all the love and joy that comes your way! 🎂💖<br><br>
+
+        <strong>With all our love and warmest wishes,</strong><br>Your Family.<br><br>
+
+        <em>"The best way to predict the future is to create it." – Abraham Lincoln</em><br>
+        <em>"The only way to do great work is to love what you do." – Steve Jobs</em>
+    `;
+
+    // Typing effect implementation
     let index = 0;
     const messageContainer = document.getElementById('celebration-message');
-    const typeMessage = () => {
-        if (index < messageText.length) {
-            messageContainer.textContent += messageText.charAt(index);
+    let parts = messageText.split(/(<[^>]*>)/);  // Split message by HTML tags
+
+    function typeMessage() {
+        if (index < parts.length) {
+            messageContainer.innerHTML += parts[index]; // Add the next part (text or HTML tag)
             index++;
-            setTimeout(typeMessage, 50);
+            setTimeout(typeMessage, 50); // Control typing speed here
         }
-    };
-    typeMessage();
+    }
+
+    typeMessage();  // Start the typing effect
 
     // Calculate and display age details
     calculateAge();
@@ -675,6 +698,32 @@ function startCelebration() {
     // Play music automatically when the celebration screen is shown
     playMusic();
 }
+
+function typeMessage() {
+    let htmlContent = messageText;
+    
+    // A regular expression to identify HTML tags
+    const regex = /(<[^>]*>)/g;
+    let parts = htmlContent.split(regex);
+
+    // Filter out empty parts
+    parts = parts.filter(part => part !== "");
+
+    let index = 0;
+    const messageContainer = document.getElementById('celebration-message');
+
+    const addNextPart = () => {
+        if (index < parts.length) {
+            messageContainer.innerHTML += parts[index]; // Append each part (text or HTML tag)
+            index++;
+            setTimeout(addNextPart, 50); // Delay for typing effect
+        }
+    };
+
+    // Start typing
+    addNextPart();
+}
+
 
 function calculateAge() {
     const dob = new Date(1995, 10, 28); // Example birthday: 28th Nov 1995
